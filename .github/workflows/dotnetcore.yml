@@ -2,8 +2,8 @@ name: .NET Core
 
 
 env:
-  AZURE_WEBAPP_NAME: luistest1    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '/home/runner/work/luis.azure.api/luis.azure.api/src/published'      # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_NAME: api-github-azurecommunityday    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: './src/published'      # set this to the path to your web app project, defaults to the repository root
 
 
 on: [push,pull_request]
@@ -21,7 +21,7 @@ jobs:
     - name: 'Deploy environment vars'
       uses: azure/appservice-settings@v1
       with:
-        app-name: 'luisazureapi'
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
         #slot-name: 'staging'  # Optional and needed only if the settings have to be configured on the specific deployment slot
         app-settings-json: '${{ secrets.APP_SETTINGS }}' 
         #connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
