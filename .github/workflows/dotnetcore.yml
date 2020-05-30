@@ -6,7 +6,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: './src/published'      # set this to the path to your web app project, defaults to the repository root
 
 
-on: [pull_request]
+on: [push,pull_request]
 
 jobs:
   build:
