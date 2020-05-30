@@ -1,0 +1,45 @@
+name: .NET Core
+
+
+env:
+  AZURE_WEBAPP_NAME: luistest1    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '/home/runner/work/luis.azure.api/luis.azure.api/src/published'      # set this to the path to your web app project, defaults to the repository root
+
+
+on: [push,pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: azure/login@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+    - name: 'Deploy environment vars'
+      uses: azure/appservice-settings@v1
+      with:
+        app-name: 'luisazureapi'
+        #slot-name: 'staging'  # Optional and needed only if the settings have to be configured on the specific deployment slot
+        app-settings-json: '${{ secrets.APP_SETTINGS }}' 
+        #connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
+        general-settings-json: '{"alwaysOn": "false", "webSocketsEnabled": "true"}' #'General configuration settings as Key Value pairs'
+      id: settings
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: 'Restore with dotnet'
+      run: dotnet restore
+    - name: 'Build with dotnet'
+      run: dotnet build --configuration Release -r linux-x64
+    - name: 'Publish with dotnet'
+      run: dotnet publish --configuration Release -o published -r linux-x64 -f netcoreapp2.2
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

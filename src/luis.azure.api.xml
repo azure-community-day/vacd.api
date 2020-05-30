@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>luis.azure.api</name>
+    </assembly>
+    <members>
+        <member name="T:luis.azure.api.Features.Health.HealthController">
+            <summary>
+            API Controller for Health operations
+            </summary>
+        </member>
+        <member name="M:luis.azure.api.Features.Health.HealthController.Ping">
+            <summary>
+            Health Probe
+            </summary>
+            <returns>"pong" as a health probe</returns>
+        </member>
+        <member name="P:luis.azure.api.Features.Resources.ResourceCreateResponse.ResourceId">
+            <summary>
+            The id of teh resource created
+            </summary>
+        </member>
+        <member name="P:luis.azure.api.Features.Resources.ResourceCreateResponse.ResourceName">
+            <summary>
+            The name of the resource created
+            </summary>
+        </member>
+        <member name="T:luis.azure.api.Features.Resources.ResourceGroupCreateHandler">
+            <summary>
+            Create a Service Principal Level 1
+            </summary>
+        </member>
+        <member name="T:luis.azure.api.Features.Resources.ResourceGroupCreateRequest">
+            <summary>
+            Request for creating a Service Principal
+            </summary>
+        </member>
+        <member name="P:luis.azure.api.Features.Resources.ResourceGroupCreateRequest.SubscriptionId">
+            <summary>
+            The ID of the subscription where to create the resource
+            </summary>
+        </member>
+        <member name="P:luis.azure.api.Features.Resources.ResourceGroupCreateRequest.ResourceGroupName">
+            <summary>
+            The friendly name of the resource group to be created
+            </summary>
+        </member>
+        <member name="P:luis.azure.api.Features.Resources.ResourceGroupCreateRequest.ResourceGroupLocation">
+            <summary>
+            The location of the resource group to be created
+            </summary>
+        </member>
+        <member name="T:luis.azure.api.Features.Resources.ResourcesController">
+            <summary>
+            API Controller for resources operations
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:luis.azure.api.Features.Resources.ResourcesController.Create(luis.azure.api.Features.Resources.ResourceGroupCreateRequest)" -->
+        <member name="M:luis.azure.api.Services.ResourceBuilder.CreateResourceGroup(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a resource group.
+            </summary>
+            <param name="token">The brearer token acquired againts Azure Management API to use when creating the resource group.</param>
+            <param name="subscriptionId">The subscription id under which the resource group will be created.</param>
+            <param name="resourceGroupName">The name that will be given to the new resource group.</param>
+            <param name="resourceGroupLocation">The location where the resource group will be created.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> object that represents the asynchronous operation.</returns>
+        </member>
+        <member name="M:luis.azure.api.Services.TokenBuilder.getToken">
+            <summary>
+            Generates a Bearer Token against Azure Management API.
+            </summary>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> object that represents the asynchronous operation.</returns>
+        </member>
+    </members>
+</doc>
