@@ -5,7 +5,7 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: '/home/runner/work/vacd.api/vacd.api/src/published'      # set this to the path to your web app project, defaults to the repository root
 
 
-on: [pull_request]
+on: [push,pull_request]
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
     - name: 'Deploy environment vars'
       uses: azure/appservice-settings@v1
       with:
-        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+        app-name: '${{ secrets.AZURE_WEBAPP_NAME }}'
         #slot-name: 'staging'  # Optional and needed only if the settings have to be configured on the specific deployment slot
         app-settings-json: '${{ secrets.APP_SETTINGS }}' 
         #connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
