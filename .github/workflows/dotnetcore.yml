@@ -2,7 +2,6 @@ name: .NET Core
 
 
 env:
-  AZURE_WEBAPP_NAME: api-github-azurecommunityday    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '/home/runner/work/vacd.api/vacd.api/src/published'      # set this to the path to your web app project, defaults to the repository root
 
 
@@ -21,7 +20,7 @@ jobs:
     - name: 'Deploy environment vars'
       uses: azure/appservice-settings@v2
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
         #slot-name: 'staging'  # Optional and needed only if the settings have to be configured on the specific deployment slot
         app-settings-json: '${{ secrets.APP_SETTINGS }}' 
         #connection-strings-json: '${{ secrets.CONNECTION_STRINGS }}'
@@ -54,6 +53,6 @@ jobs:
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v1
       with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
