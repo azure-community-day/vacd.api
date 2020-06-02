@@ -4,7 +4,7 @@ name: .NET Core
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '/home/runner/work/vacd.api/vacd.api/src/published'      # set this to the path to your web app project, defaults to the repository root
 
-on: [push,pull_request]
+on: [pull_request]
 
 jobs:
   build:
